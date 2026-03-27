@@ -11,6 +11,7 @@
     // Sorted by date descending (Newest first)
     // Parsed dates for sorting purposes, string for display
     const allTransactions = [
+        { date: 'March 20, 2026', amount: '342.86', currency: 'BTC' },
         { date: 'March 13, 2026', amount: '107.50', currency: 'BTC' },
         { date: 'March 6, 2026', amount: '390.62', currency: 'BTC' },
         { date: 'February 27, 2026', amount: '97.69', currency: 'BTC' },
