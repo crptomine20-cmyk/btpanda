@@ -6,6 +6,16 @@
     // Mock Notifications Data
     const notifications = [
         {
+            id: 2,
+            title: 'Withdrawals Now Available on BitPanda',
+            message: 'We are pleased to announce that withdrawals are now successfully available on Bitpanda. Thank you for your continued support in reaching this milestone.\n\nWe remain committed to improving your experience with more features to come.',
+            date: 'April 1, 2026 9:00 am',
+            read: false,
+            icon: 'mdi:bank-transfer-out',
+            color: 'text-secondary',
+            bg: 'bg-secondary/10'
+        },
+        {
             id: 1,
             title: 'Welcome Back! The launch is finally here.',
             message: 'Thank you for choosing Bitpanda for your investment journey. We’re committed to making investing simple, secure, and rewarding for every user.\n\nExplore the platform, discover new opportunities, and start growing your assets with confidence.',
@@ -26,7 +36,14 @@
         const readNotifications = JSON.parse(localStorage.getItem('readNotifications') || '[]');
         
         notifications.forEach(n => {
-            if (readNotifications.includes(n.id)) {
+            // Notification 2 (withdrawals) should always appear unread on first visit
+            // It uses sessionStorage so users see the badge once per browser session
+            if (n.id === 2) {
+                const seenThisSession = sessionStorage.getItem('notif_2_seen');
+                if (seenThisSession) {
+                    n.read = true;
+                }
+            } else if (readNotifications.includes(n.id)) {
                 n.read = true;
             }
         });
@@ -34,11 +51,13 @@
         // Mark all as read after viewing
         const unreadIds = notifications.filter(n => !n.read).map(n => n.id);
         if (unreadIds.length > 0) {
-            const updatedRead = [...readNotifications, ...unreadIds];
+            const updatedRead = [...new Set([...readNotifications, ...unreadIds])];
             localStorage.setItem('readNotifications', JSON.stringify(updatedRead));
             
-            // Re-assign to trigger reactivity if needed, though we just modify properties here for initial render
-             notifications.forEach(n => n.read = true);
+            // Mark notification 2 as seen for this session
+            sessionStorage.setItem('notif_2_seen', 'true');
+            
+            notifications.forEach(n => n.read = true);
         }
     });
 </script>
