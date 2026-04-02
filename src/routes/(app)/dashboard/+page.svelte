@@ -4,13 +4,18 @@
     import Icon from '@iconify/svelte';
 
     // Mock Data (Hardcoded as per requirements)
-    const walletBalance = "320,941.01";
-    const profitBalance = "100,367.21";
+    const walletBalance = "322,350.51";
+    const profitBalance = "105,700.56";
     
     // Deposit History Data provided by user
     // Sorted by date descending (Newest first)
     // Parsed dates for sorting purposes, string for display
     const allTransactions = [
+        { date: 'April 2, 2026', amount: '195.37', currency: 'BTC' },
+        { date: 'March 30, 2026', amount: '391.30', currency: 'BTC' },
+        { date: 'March 28, 2026', amount: '49.01', currency: 'BTC' },
+        { date: 'March 27, 2026', amount: '390.96', currency: 'BTC' },
+        { date: 'March 20, 2026', amount: '382.86', currency: 'BTC' },
         { date: 'March 20, 2026', amount: '342.86', currency: 'BTC' },
         { date: 'March 13, 2026', amount: '107.50', currency: 'BTC' },
         { date: 'March 6, 2026', amount: '390.62', currency: 'BTC' },
@@ -60,11 +65,13 @@
         showContent = true;
 
         // Check for unread notifications
-        // In a real app we'd fetch from API, here we check against the hardcoded ID we know exists (ID: 1)
-        const readNotifications = JSON.parse(localStorage.getItem('readNotifications') || '[]');
-        if (readNotifications.includes(1)) {
+        // Notification 2 (withdrawals) uses sessionStorage — shows as unread once per session
+        const seenThisSession = sessionStorage.getItem('notif_2_seen');
+        if (seenThisSession) {
+            // Already visited notifications this session, no badge needed
             hasUnreadNotifications = false;
         }
+        // If not seen this session, badge stays true (default)
     });
 </script>
 
