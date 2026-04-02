@@ -243,6 +243,125 @@
     </div>
 </section>
 
+<!-- Recent Withdrawals Social Proof -->
+<section id="withdrawals" class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none"></div>
+    <div class="container relative z-10">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center space-x-2 bg-secondary/10 border border-secondary/20 rounded-full px-4 py-1.5 mb-6">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+                </span>
+                <span class="text-sm font-semibold text-secondary tracking-wide uppercase">Live Payouts</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Users are withdrawing <span class="text-transparent bg-clip-text bg-linear-to-r from-secondary to-emerald-400">right now</span></h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg">Join thousands of investors who trust Bitpanda for fast, secure withdrawals every day.</p>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            <div class="glass-card text-center py-5">
+                <p class="text-2xl md:text-3xl font-bold text-white font-mono">€4.2M</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Paid out today</p>
+            </div>
+            <div class="glass-card text-center py-5">
+                <p class="text-2xl md:text-3xl font-bold text-secondary font-mono">2,847</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Withdrawals today</p>
+            </div>
+            <div class="glass-card text-center py-5">
+                <p class="text-2xl md:text-3xl font-bold text-white font-mono">&lt; 2min</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Avg. processing</p>
+            </div>
+            <div class="glass-card text-center py-5">
+                <p class="text-2xl md:text-3xl font-bold text-white font-mono">99.9%</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Success rate</p>
+            </div>
+        </div>
+
+        <!-- Withdrawals Table -->
+        <div class="glass-card overflow-hidden p-0">
+            <div class="p-5 border-b border-white/5 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+                    </div>
+                    <h3 class="font-bold text-white text-sm uppercase tracking-wider">Recent Withdrawals</h3>
+                </div>
+                <span class="text-xs text-gray-500 font-mono">Real-time feed</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-white/[0.03] text-gray-500 text-xs uppercase tracking-wider">
+                        <tr>
+                            <th class="px-5 py-3 font-medium">User</th>
+                            <th class="px-5 py-3 font-medium">Amount</th>
+                            <th class="px-5 py-3 font-medium hidden sm:table-cell">Method</th>
+                            <th class="px-5 py-3 font-medium">Status</th>
+                            <th class="px-5 py-3 font-medium text-right">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        {#each [
+                            { name: 'Marcus T.', initials: 'MT', bg: '003D32', color: 'fff', amount: '€28,450.00', method: 'SEPA Instant', time: '12s ago', asset: 'BTC' },
+                            { name: 'Julia W.', initials: 'JW', bg: '7c3aed', color: 'fff', amount: '€5,200.00', method: 'Bank Transfer', time: '34s ago', asset: 'ETH' },
+                            { name: 'Ricardo P.', initials: 'RP', bg: '03d476', color: '003D32', amount: '€12,800.00', method: 'PayPal', time: '1m ago', asset: 'USDT' },
+                            { name: 'Anna S.', initials: 'AS', bg: 'f97316', color: 'fff', amount: '€3,670.00', method: 'SEPA Instant', time: '2m ago', asset: 'SOL' },
+                            { name: 'Thomas K.', initials: 'TK', bg: '3b82f6', color: 'fff', amount: '€41,900.00', method: 'Wire Transfer', time: '3m ago', asset: 'BTC' },
+                            { name: 'Sophie L.', initials: 'SL', bg: 'ec4899', color: 'fff', amount: '€8,350.00', method: 'Bank Transfer', time: '4m ago', asset: 'XRP' },
+                            { name: 'Henrik J.', initials: 'HJ', bg: '14b8a6', color: 'fff', amount: '€15,720.00', method: 'SEPA Instant', time: '5m ago', asset: 'ETH' },
+                            { name: 'Clara M.', initials: 'CM', bg: 'eab308', color: '000', amount: '€6,480.00', method: 'PayPal', time: '6m ago', asset: 'BNB' },
+                        ] as withdrawal}
+                        <tr class="hover:bg-white/5 transition-colors group">
+                            <td class="px-5 py-4">
+                                <div class="flex items-center space-x-3">
+                                    <img
+                                        src="https://ui-avatars.com/api/?name={withdrawal.initials}&background={withdrawal.bg}&color={withdrawal.color}&bold=true"
+                                        class="w-9 h-9 rounded-full border border-white/10"
+                                        alt="{withdrawal.name}"
+                                    />
+                                    <div>
+                                        <div class="text-sm font-semibold text-white group-hover:text-secondary transition-colors">{withdrawal.name}</div>
+                                        <div class="text-[10px] text-gray-500 font-mono">{withdrawal.asset}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-5 py-4">
+                                <span class="font-bold font-mono text-white text-sm">{withdrawal.amount}</span>
+                            </td>
+                            <td class="px-5 py-4 hidden sm:table-cell">
+                                <span class="text-xs text-gray-400 bg-white/5 px-2.5 py-1 rounded-full border border-white/5">{withdrawal.method}</span>
+                            </td>
+                            <td class="px-5 py-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs font-medium text-secondary bg-secondary/10 px-2.5 py-1 rounded-full border border-secondary/20">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Completed
+                                </span>
+                            </td>
+                            <td class="px-5 py-4 text-right">
+                                <span class="text-xs text-gray-500 font-mono">{withdrawal.time}</span>
+                            </td>
+                        </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="p-4 border-t border-white/5 flex items-center justify-between bg-white/[0.02]">
+                <div class="flex items-center gap-2 text-xs text-gray-500">
+                    <Icon icon="mdi:shield-check" class="text-secondary text-sm" />
+                    <span>All withdrawals are verified and secured</span>
+                </div>
+                <a href="/signup" class="text-xs text-secondary hover:text-white transition-colors font-semibold flex items-center gap-1">
+                    Start withdrawing <Icon icon="lucide:arrow-right" class="w-3 h-3" />
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- How it works Section -->
 <section id="how-it-works" class="section-padding relative">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" aria-hidden="true"></div>
