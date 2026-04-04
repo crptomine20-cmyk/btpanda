@@ -7,6 +7,7 @@
     const walletBalance = "322,350.51";
     const walletBalanceNum = 322350.51;
     const profitBalance = "105,700.56";
+    const profitBalanceNum = 105700.56;
 
     // Recent withdrawal history
     const recentWithdrawals = [
@@ -54,8 +55,8 @@
             return false;
         }
 
-        if (num > walletBalanceNum) {
-            amountError = `Amount exceeds your available balance of $${walletBalance}`;
+        if (num > profitBalanceNum) {
+            amountError = `Amount exceeds your available balance of $${profitBalance}`;
             return false;
         }
 
@@ -180,7 +181,7 @@
                 <button
                     type="button"
                     class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-secondary bg-secondary/10 px-3 py-1.5 rounded-lg hover:bg-secondary/20 transition-colors"
-                    on:click={() => { withdrawAmount = walletBalanceNum.toFixed(2); inputTouched = true; validateAmount(); }}
+                    on:click={() => { withdrawAmount = profitBalanceNum.toFixed(2); inputTouched = true; validateAmount(); }}
                 >
                     MAX
                 </button>
@@ -191,7 +192,7 @@
                     {amountError}
                 </p>
             {/if}
-            <p class="mt-2 text-white/30 text-xs">Available: <span class="text-white/50">${walletBalance} USDT</span></p>
+            <p class="mt-2 text-white/30 text-xs">Available: <span class="text-white/50">${profitBalance} USDT</span></p>
         </div>
 
         <!-- Withdraw Button -->
