@@ -7,6 +7,11 @@
     // Transaction Data
     // Added Pending Withdrawal as requested
     const allTransactions = [
+        { date: 'April 2, 2026', amount: '195.37', currency: 'BTC', type: 'Deposit', status: 'Completed' },
+        { date: 'March 30, 2026', amount: '391.30', currency: 'BTC', type: 'Deposit', status: 'Completed' },
+        { date: 'March 28, 2026', amount: '49.01', currency: 'BTC', type: 'Deposit', status: 'Completed' },
+        { date: 'March 27, 2026', amount: '390.96', currency: 'BTC', type: 'Deposit', status: 'Completed' },
+        { date: 'March 20, 2026', amount: '382.86', currency: 'BTC', type: 'Deposit', status: 'Completed' },
         { date: 'March 20, 2026', amount: '342.86', currency: 'BTC', type: 'Deposit', status: 'Completed' },
         { date: 'March 13, 2026', amount: '107.50', currency: 'BTC', type: 'Deposit', status: 'Completed' },
         { date: 'March 6, 2026', amount: '390.62', currency: 'BTC', type: 'Deposit', status: 'Completed' },
