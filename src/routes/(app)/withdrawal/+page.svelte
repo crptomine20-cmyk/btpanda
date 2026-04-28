@@ -4,22 +4,21 @@
     import { cubicOut } from 'svelte/easing';
     import Icon from '@iconify/svelte';
 
-    const walletBalance = "322,350.51";
-    const walletBalanceNum = 322350.51;
-    const profitBalance = "105,700.56";
-    const profitBalanceNum = 105700.56;
+    const walletBalance = "339,283.40";
+    const walletBalanceNum = 339283.40;
+    const profitBalance = "110,200.00";
+    const profitBalanceNum = 110200.00;
 
     // Recent withdrawal history
-    const recentWithdrawals = [
-        { 
-            date: 'Dec 22, 2025', 
-            amount: '43,000.00', 
-            currency: 'USD', 
-            status: 'Processing',
-            address: '0x952c...d49B',
-            note: 'Accumulated profits'
-        },
-    ];
+    import { transactionsStore } from '$lib/stores/transactions.svelte';
+
+    $: recentWithdrawals = transactionsStore.withdrawals;
+
+    function formatAddress(address?: string) {
+        if (!address) return '';
+        if (address.length <= 10) return address;
+        return address.slice(0, 6) + '...' + address.slice(-4);
+    }
 
     let showContent = false;
     let isWithdrawing = false;
@@ -230,7 +229,7 @@
                             <div>
                                 <p class="text-white font-medium group-hover:text-secondary transition-colors">Withdrawal {withdrawal.currency}</p>
                                 <p class="text-white/40 text-xs">{withdrawal.date}</p>
-                                <p class="text-[10px] text-white/30 mt-0.5 font-mono">{withdrawal.address}</p>
+                                <p class="text-[10px] text-white/30 mt-0.5 font-mono">{formatAddress(withdrawal.details?.address)}</p>
                             </div>
                         </div>
                         <div class="text-right">
@@ -317,7 +316,7 @@
                 <span class="text-white/50 text-sm">Required Deposit</span>
                 <span class="text-xs bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded-full border border-yellow-500/20">Refundable</span>
             </div>
-            <p class="text-3xl font-bold text-white">$3,000.00 <span class="text-base text-white/40 font-normal">USD</span></p>
+            <p class="text-3xl font-bold text-white">$2,770.00 <span class="text-base text-white/40 font-normal">USD</span></p>
         </div>
 
         <!-- Info Points -->
