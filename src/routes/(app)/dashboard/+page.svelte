@@ -4,58 +4,17 @@
     import Icon from '@iconify/svelte';
 
     // Mock Data (Hardcoded as per requirements)
-    const walletBalance = "322,350.51";
-    const profitBalance = "105,700.56";
+    const walletBalance = "339,283.40";
+    const profitBalance = "110,200.00";
     
-    // Deposit History Data provided by user
-    // Sorted by date descending (Newest first)
-    // Parsed dates for sorting purposes, string for display
-    const allTransactions = [
-        { date: 'April 2, 2026', amount: '195.37', currency: 'BTC' },
-        { date: 'March 30, 2026', amount: '391.30', currency: 'BTC' },
-        { date: 'March 28, 2026', amount: '49.01', currency: 'BTC' },
-        { date: 'March 27, 2026', amount: '390.96', currency: 'BTC' },
-        { date: 'March 20, 2026', amount: '382.86', currency: 'BTC' },
-        { date: 'March 20, 2026', amount: '342.86', currency: 'BTC' },
-        { date: 'March 13, 2026', amount: '107.50', currency: 'BTC' },
-        { date: 'March 6, 2026', amount: '390.62', currency: 'BTC' },
-        { date: 'February 27, 2026', amount: '97.69', currency: 'BTC' },
-        { date: 'February 27, 2026', amount: '195.45', currency: 'BTC' },
-        { date: 'February 20, 2026', amount: '295.40', currency: 'BTC' },
-        { date: 'February 14, 2026', amount: '294.12', currency: 'BTC' },
-        { date: 'February 7, 2026', amount: '197.01', currency: 'CAD (BTC Eq.)' },
-        { date: 'February 2, 2026', amount: '343.32', currency: 'CAD (BTC Eq.)' },
-        { date: 'Jan 31, 2026', amount: '68.60', currency: 'CAD' },
-        { date: 'Jan 26, 2026', amount: '245.07', currency: 'CAD' },
-        { date: 'Jan 20, 2026', amount: '98.27', currency: 'CAD' },
-        { date: 'Jan 19, 2026', amount: '196.10', currency: 'CAD' },
-        { date: 'Jan 7, 2026', amount: '196.14', currency: 'CAD' },
-        { date: 'Jan 3, 2026', amount: '147.80', currency: 'CAD' },
-        { date: 'December 29, 2025', amount: '294.16', currency: 'CAD' },
-        { date: 'December 26, 2025', amount: '98.03', currency: 'CAD' },
-        { date: 'November 11, 2025', amount: '393.32', currency: 'CAD' },
-        { date: 'November 10, 2025', amount: '291.27', currency: 'CAD' },
-        { date: 'November 6, 2025', amount: '101.90', currency: 'CAD' },
-        { date: 'November 5, 2025', amount: '293.24', currency: 'CAD' },
-        { date: 'October 31, 2025', amount: '53.63', currency: 'CAD' },
-        { date: 'October 22, 2025', amount: '145.40', currency: 'CAD' },
-        { date: 'October 16, 2025', amount: '96.99', currency: 'CAD' },
-        { date: 'October 9, 2025', amount: '97.56', currency: 'CAD' },
-        { date: 'October 3, 2025', amount: '97.46', currency: 'CAD' },
-        { date: 'September 16, 2025', amount: '97.20', currency: 'CAD' },
-    ];
+    import { transactionsStore } from '$lib/stores/transactions.svelte';
 
-    // Take top 5 for dashboard
-    const recentTransactions = allTransactions.slice(0, 5).map((tx, index) => ({
-        id: index,
-        type: 'Deposit', 
-        asset: tx.currency, 
-        amount: tx.amount, 
-        value: tx.amount, 
-        date: tx.date, 
-        status: 'Completed', 
-        icon: 'mdi:bank-transfer-in'
-    }));
+    $: recentTransactions = transactionsStore.all.slice(0, 5);
+
+    function getIcon(tx: any) {
+        if (tx.type === 'Withdrawal') return 'mdi:bank-transfer-out';
+        return 'mdi:bank-transfer-in';
+    }
 
 
     let showContent = false;
@@ -172,19 +131,21 @@
                 {#each recentTransactions as tx, i}
                     <div class="p-4 flex items-center justify-between border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors cursor-pointer group">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-secondary/20 text-secondary">
-                                <Icon icon={tx.icon} class="text-xl" />
+                            <div class={`w-10 h-10 rounded-full flex items-center justify-center ${tx.type === 'Withdrawal' ? 'bg-yellow-500/20 text-yellow-500' : 'bg-secondary/20 text-secondary'}`}>
+                                <Icon icon={getIcon(tx)} class="text-xl" />
                             </div>
                             <div>
-                                <p class="text-white font-medium group-hover:text-secondary transition-colors">{tx.type} {tx.asset}</p>
+                                <p class="text-white font-medium group-hover:text-secondary transition-colors">
+                                    {tx.type === 'Withdrawal' ? 'Withdrawal Processing' : `${tx.type} ${tx.currency}`}
+                                </p>
                                 <p class="text-white/40 text-xs">{tx.date}</p>
                             </div>
                         </div>
                         <div class="text-right">
-                            <p class="font-medium text-secondary">
-                                +${tx.value}
+                             <p class={`font-medium ${tx.type === 'Withdrawal' ? 'text-white' : 'text-secondary'}`}>
+                                {tx.type === 'Withdrawal' ? '-' : '+'}${tx.amount}
                             </p>
-                            <p class="text-xs text-green-400">
+                            <p class={`text-xs ${tx.status === 'Completed' ? 'text-green-400' : 'text-yellow-400'}`}>
                                 {tx.status}
                             </p>
                         </div>
