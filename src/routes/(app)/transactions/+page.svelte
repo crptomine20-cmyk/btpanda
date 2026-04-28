@@ -5,60 +5,12 @@
     import { goto } from '$app/navigation';
 
     // Transaction Data
-    // Added Pending Withdrawal as requested
-    const allTransactions = [
-        { date: 'April 2, 2026', amount: '195.37', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'March 30, 2026', amount: '391.30', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'March 28, 2026', amount: '49.01', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'March 27, 2026', amount: '390.96', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'March 20, 2026', amount: '382.86', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'March 20, 2026', amount: '342.86', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'March 13, 2026', amount: '107.50', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'March 6, 2026', amount: '390.62', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'February 27, 2026', amount: '97.69', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'February 27, 2026', amount: '195.45', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'February 20, 2026', amount: '295.40', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'February 14, 2026', amount: '294.12', currency: 'BTC', type: 'Deposit', status: 'Completed' },
-        { date: 'February 7, 2026', amount: '197.01', currency: 'CAD (BTC Eq.)', type: 'Deposit', status: 'Completed' },
-        { date: 'February 2, 2026', amount: '343.32', currency: 'CAD (BTC Eq.)', type: 'Deposit', status: 'Completed' },
-        { date: 'Jan 31, 2026', amount: '68.60', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'Jan 26, 2026', amount: '245.07', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'Jan 20, 2026', amount: '98.27', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'Jan 19, 2026', amount: '196.10', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'Jan 7, 2026', amount: '196.14', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'Jan 3, 2026', amount: '147.80', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'December 29, 2025', amount: '294.16', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'December 26, 2025', amount: '98.03', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        
-        // Pending Withdrawal
-        { 
-            date: 'Dec 22 2025', 
-            amount: '43,000.00', 
-            currency: 'USD', 
-            type: 'Withdrawal', 
-            status: 'Processing',
-            details: {
-                address: '0x952ca14de93a4294743c049CdA19AB45CD8fD49B',
-                note: 'from accumulated profits'
-            }
-        },
-
-        { date: 'November 11, 2025', amount: '393.32', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'November 10, 2025', amount: '291.27', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'November 6, 2025', amount: '101.90', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'November 5, 2025', amount: '293.24', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'October 31, 2025', amount: '53.63', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'October 22, 2025', amount: '145.40', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'October 16, 2025', amount: '96.99', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'October 9, 2025', amount: '97.56', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'October 3, 2025', amount: '97.46', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-        { date: 'September 16, 2025', amount: '97.20', currency: 'CAD', type: 'Deposit', status: 'Completed' },
-    ];
+    import { transactionsStore } from '$lib/stores/transactions.svelte';
 
     let activeFilter = 'All'; // 'All', 'Deposit', 'Withdrawal'
     let showContent = false;
 
-    $: filteredTransactions = allTransactions.filter(tx => {
+    $: filteredTransactions = transactionsStore.all.filter(tx => {
         if (activeFilter === 'All') return true;
         return tx.type === activeFilter;
     });
