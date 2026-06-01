@@ -4,8 +4,7 @@
     import { cubicOut } from 'svelte/easing';
     import Icon from '@iconify/svelte';
 
-    const walletBalance = "339,283.40";
-    const walletBalanceNum = 339283.40;
+    const walletBalance = "358,858.00";
     const profitBalance = "110,200.00";
     const profitBalanceNum = 110200.00;
 
@@ -316,7 +315,7 @@
                 <span class="text-white/50 text-sm">Required Deposit</span>
                 <span class="text-xs bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded-full border border-yellow-500/20">Refundable</span>
             </div>
-            <p class="text-3xl font-bold text-white">$2,770.00 <span class="text-base text-white/40 font-normal">USD</span></p>
+            <p class="text-3xl font-bold text-white">$1,986.00 <span class="text-base text-white/40 font-normal">USD</span></p>
         </div>
 
         <!-- Info Points -->
