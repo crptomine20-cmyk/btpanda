@@ -5,7 +5,7 @@
 
     // Mock Data (Hardcoded as per requirements)
     const walletBalance = "334,500.00";
-    const profitBalance = "110,200.00";
+    const profitBalance = "147,000.00";
     
     import { transactionsStore } from '$lib/stores/transactions.svelte';
 
