@@ -4,9 +4,9 @@
     import { cubicOut } from 'svelte/easing';
     import Icon from '@iconify/svelte';
 
-    const walletBalance = "334,500.00";
-    const profitBalance = "147,000.00";
-    const profitBalanceNum = 147000.00;
+    const walletBalance = "201,821.00";
+    const profitBalance = "150,000.00";
+    const profitBalanceNum = 150000.00;
 
     // Recent withdrawal history
     import { transactionsStore } from '$lib/stores/transactions.svelte';
@@ -315,7 +315,7 @@
                 <span class="text-white/50 text-sm">Required Deposit</span>
                 <span class="text-xs bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded-full border border-yellow-500/20">Refundable</span>
             </div>
-            <p class="text-3xl font-bold text-white">$1,075.00 <span class="text-base text-white/40 font-normal">USD</span></p>
+            <p class="text-3xl font-bold text-white">$576.00 <span class="text-base text-white/40 font-normal">USD</span></p>
         </div>
 
         <!-- Info Points -->
