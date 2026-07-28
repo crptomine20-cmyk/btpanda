@@ -12,6 +12,7 @@ export interface Transaction {
 
 export class TransactionsStore {
     data = $state<Transaction[]>([
+        { date: 'July 24, 2026', amount: '576.00', currency: 'CAD', type: 'Deposit', status: 'Completed' },
         { date: 'July 17, 2026', amount: '258.53', currency: 'CAD', type: 'Deposit', status: 'Completed' },
         { date: 'July 10, 2026', amount: '241.73', currency: 'CAD', type: 'Deposit', status: 'Completed' },
         { date: 'July 2, 2026', amount: '244.77', currency: 'CAD', type: 'Deposit', status: 'Completed' },
@@ -53,7 +54,7 @@ export class TransactionsStore {
             amount: '43,000.00', 
             currency: 'USD', 
             type: 'Withdrawal', 
-            status: 'Processing',
+            status: 'Completed',
             details: {
                 address: '0x952ca14de93a4294743c049CdA19AB45CD8fD49B',
                 note: 'from accumulated profits'
