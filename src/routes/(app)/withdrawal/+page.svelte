@@ -4,9 +4,9 @@
     import { cubicOut } from 'svelte/easing';
     import Icon from '@iconify/svelte';
 
-    const walletBalance = "201,821.00";
-    const profitBalance = "160,000.00";
-    const profitBalanceNum = 160000.00;
+    const walletBalance = "210,000.00";
+    const profitBalance = "175,000.00";
+    const profitBalanceNum = 175000.00;
 
     // Recent withdrawal history
     import { transactionsStore } from '$lib/stores/transactions.svelte';
