@@ -4,8 +4,8 @@
     import Icon from '@iconify/svelte';
 
     // Mock Data (Hardcoded as per requirements)
-    const walletBalance = "237,655.00";
-    const profitBalance = "182,000.00";
+    const walletBalance = "270,000.00";
+    const profitBalance = "203,000.00";
     
     import { transactionsStore } from '$lib/stores/transactions.svelte';
 
